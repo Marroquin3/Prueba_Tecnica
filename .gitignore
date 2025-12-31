@@ -1,0 +1,39 @@
+# Archivos de Visual Studio
+.vs/
+*.user
+*.suo
+*.slnx
+*.csproj.user
+
+# Carpetas de compilación
+bin/
+obj/
+
+# Configuración de usuario
+*.userprefs
+
+# Docker
+
+# Archivos de proyecto Rider
+*.idea/
+
+# VS Code
+.vscode/
+
+# Archivos de depuración
+*.pdb
+*.exe
+*.dll
+
+# Configuraciones locales
+appsettings.local.json
+appsettings.Development.local.json
+
+# Logs
+*.log
+logs/
+
+# Archivos temporales
+*.tmp
+*.temp
+*~

@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest  # Imagen de SQL Server
+    container_name: sqlserver
+    environment:
+      ACCEPT_EULA: "Y"           # Acepta términos de Microsoft
+      SA_PASSWORD: "Password123!" # Contraseña del administrador
+      MSSQL_PID: "Express"       # Versión gratuita
+    ports:
+      - "1433:1433"              # Puerto estándar SQL Server
+    volumes:
+      - sqlserver_data:/var/opt/mssql  # Guarda datos permanentemente
+    healthcheck:                 # Verifica que BD esté lista
+      test: ["CMD", "/opt/mssql-tools/bin/sqlcmd", "-S", "localhost", "-U", "sa", "-P", "Password123!", "-Q", "SELECT 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build: .                     # Usa Dockerfile de esta carpeta
+    container_name: webapinet8
+    ports:
+      - "8080:8080"              # Puerto HTTP
+      - "8081:8081"              # Puerto HTTPS
+    environment:
+      ConnectionStrings__DefaultConnection: >  # Conexión a BD
+        Server=db;                # "db" es el nombre del servicio SQL
+        Database=PruebaDB2;       # Nombre de la base de datos
+        User Id=sa;               # Usuario administrador
+        Password=Password123!;    # Misma contraseña de arriba
+        TrustServerCertificate=True;  # Solo desarrollo
+      ASPNETCORE_ENVIRONMENT: "Development"  # Modo desarrollo
+      ASPNETCORE_HTTPS_PORTS: "8081"  # Puerto HTTPS interno
+      ASPNETCORE_HTTP_PORTS: "8080"   # Puerto HTTP interno
+    depends_on:
+      db:
+        condition: service_healthy  # Espera que BD esté lista
+
+volumes:
+  sqlserver_data:                # Almacena datos BD permanentemente

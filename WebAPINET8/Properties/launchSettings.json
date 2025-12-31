@@ -1,0 +1,113 @@
+{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:5004",
+      "sslPort": 7226
+    }
+  },
+  "profiles": {
+    "WebAPINET8.Development.HTTP": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_DETAILEDERRORS": "true",
+        "ASPNETCORE_URLS": "http://localhost:5004"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "http://localhost:5004",
+      "hotReloadEnabled": true
+    },
+    "WebAPINET8.Development.HTTPS": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_DETAILEDERRORS": "true",
+        "ASPNETCORE_URLS": "https://localhost:7226;http://localhost:5004"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "https://localhost:7226;http://localhost:5004",
+      "hotReloadEnabled": true
+    },
+    "WebAPINET8.Production": {
+      "commandName": "Project",
+      "launchBrowser": false,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production",
+        "DOTNET_ENVIRONMENT": "Production",
+        "ASPNETCORE_URLS": "http://+:5004;https://+:7226"
+      },
+      "dotnetRunMessages": false,
+      "applicationUrl": "https://localhost:7226;http://localhost:5004"
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_DETAILEDERRORS": "true"
+      },
+      "nativeDebugging": false
+    },
+    "Container (Dockerfile) - HTTP": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost:5004/swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "http://+:5004",
+        "DOTNET_RUNNING_IN_CONTAINER": "true"
+      },
+      "publishAllPorts": true,
+      "useSSL": false,
+      "httpPort": 5004,
+      "dockerRunArguments": "-p 5004:5004 -e ASPNETCORE_URLS=http://+:5004"
+    },
+    "Container (Dockerfile) - HTTPS": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "https://localhost:7226/swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "https://+:7226;http://+:5004",
+        "DOTNET_RUNNING_IN_CONTAINER": "true",
+        "ASPNETCORE_Kestrel__Certificates__Default__Password": "password123",
+        "ASPNETCORE_Kestrel__Certificates__Default__Path": "/https/aspnetapp.pfx"
+      },
+      "publishAllPorts": true,
+      "useSSL": true,
+      "httpPort": 5004,
+      "sslPort": 7226,
+      "dockerRunArguments": "-p 5004:5004 -p 7226:7226 -v ${USERPROFILE}/.aspnet/https:/https:ro -e ASPNETCORE_URLS=https://+:7226;http://+:5004"
+    },
+    "Container (Dockerfile) - Compose": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://localhost:{ServicePort}/swagger",
+      "serviceActions": {
+        "webapinet8": "StartWithoutDebugging"
+      },
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "WebAPINET8.NoBrowser": {
+      "commandName": "Project",
+      "launchBrowser": false,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "http://localhost:5004;https://localhost:7226"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "https://localhost:7226;http://localhost:5004"
+    }
+  }
+}
